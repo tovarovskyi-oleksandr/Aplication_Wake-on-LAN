@@ -8,9 +8,10 @@ namespace Retea_Calculator
 {
     public class UserInfo
     {
-            public string Nume { get; set; }
-            public string Telefon { get; set; }
-            public string MAC { get; set; }
-        }
+        public string Nume { get; set; }
+        public string Telefon { get; set; }
+        public string MAC { get; set; }
 
+        public UserInfo() { }
     }
+}
