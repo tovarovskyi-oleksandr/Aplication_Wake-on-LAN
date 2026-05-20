@@ -38,6 +38,7 @@
             this.btn_add_user_form = new System.Windows.Forms.Button();
             this.pnlFormLoader = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -142,12 +143,24 @@
             this.lblTitle.TabIndex = 21;
             this.lblTitle.Text = "Add User";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(702, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(224, 32);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Powertrace SRL Copyright 2026\r\nTovarovskyi Oleksandr\r\n";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(928, 610);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pnlFormLoader);
             this.Controls.Add(this.panel1);
@@ -170,6 +183,7 @@
         private System.Windows.Forms.Panel pnlNav;
         private System.Windows.Forms.Panel pnlFormLoader;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label label2;
     }
 }
 
