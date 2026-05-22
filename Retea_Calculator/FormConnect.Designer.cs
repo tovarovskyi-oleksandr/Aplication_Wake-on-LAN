@@ -44,7 +44,7 @@
             this.listViewLog.HideSelection = false;
             this.listViewLog.Location = new System.Drawing.Point(338, -1);
             this.listViewLog.Name = "listViewLog";
-            this.listViewLog.Size = new System.Drawing.Size(381, 505);
+            this.listViewLog.Size = new System.Drawing.Size(544, 506);
             this.listViewLog.TabIndex = 24;
             this.listViewLog.UseCompatibleStateImageBehavior = false;
             // 
@@ -60,6 +60,7 @@
             // comboBox1
             // 
             this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.comboBox1.ForeColor = System.Drawing.Color.White;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "COM1",
@@ -105,7 +106,7 @@
             this.btnDeconectare.Name = "btnDeconectare";
             this.btnDeconectare.Size = new System.Drawing.Size(161, 38);
             this.btnDeconectare.TabIndex = 19;
-            this.btnDeconectare.Text = "Deconectare";
+            this.btnDeconectare.Text = "Disconnect";
             this.btnDeconectare.UseVisualStyleBackColor = false;
             this.btnDeconectare.Click += new System.EventHandler(this.btnDeconectare_Click_1);
             // 
@@ -118,8 +119,7 @@
             this.btnConectare.Name = "btnConectare";
             this.btnConectare.Size = new System.Drawing.Size(163, 35);
             this.btnConectare.TabIndex = 18;
-            this.btnConectare.Text = "Conectare/Deschide Port ";
-            this.btnConectare.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnConectare.Text = "Connect/Open Port";
             this.btnConectare.UseVisualStyleBackColor = false;
             this.btnConectare.Click += new System.EventHandler(this.btnConectare_Click_1);
             // 
@@ -128,7 +128,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(928, 600);
+            this.ClientSize = new System.Drawing.Size(1088, 610);
             this.Controls.Add(this.listViewLog);
             this.Controls.Add(this.txtCommand);
             this.Controls.Add(this.comboBox1);

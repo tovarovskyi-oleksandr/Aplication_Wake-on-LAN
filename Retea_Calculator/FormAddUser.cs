@@ -21,15 +21,23 @@ namespace Retea_Calculator
         {
             InitializeComponent();
 
-            dataGridView1.Columns.Add("Nume", "Nume");
-            dataGridView1.Columns.Add("Telefon", "Telefon");
-            dataGridView1.Columns.Add("MAC", "MAC Address");
-
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Selectează tot rândul
             dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(52, 58, 64); 
             dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            if (dataGridView1.Columns["SMS"] is DataGridViewCheckBoxColumn smsCol)
+            {
+                smsCol.FalseValue = false;
+                smsCol.TrueValue = true;
+            }
+
+            if (dataGridView1.Columns["Apel"] is DataGridViewCheckBoxColumn apelCol)
+            {
+                apelCol.FalseValue = false;
+                apelCol.TrueValue = true;
+            }
         }
  
         private void btnAdd_Click(object sender, EventArgs e)
@@ -41,7 +49,7 @@ namespace Retea_Calculator
 
             users.Add(user);
 
-            dataGridView1.Rows.Add(user.Nume, user.Telefon, user.MAC);
+            dataGridView1.Rows.Add(user.Nume, user.Telefon, user.MAC, false, false);
             txtNume.Clear();
             txtTelefon.Clear();
             txtMAC.Clear();
@@ -61,19 +69,33 @@ namespace Retea_Calculator
         private void btnSave_Click_1(object sender, EventArgs e)
         {
             try
-            {
+               { 
+                users.Clear();
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    UserInfo user = new UserInfo();
+                    user.Nume = row.Cells["Nume"].Value?.ToString() ?? "";
+                    user.Telefon = row.Cells["Telefon"].Value?.ToString() ?? "";
+                    user.MAC = row.Cells["Mac"].Value?.ToString() ?? "";
+
+                    user.PermiteSMS = Convert.ToBoolean(row.Cells["SMS"].Value);
+                    user.PermiteApel = Convert.ToBoolean(row.Cells["Apel"].Value);
+
+                    users.Add(user);
+                }
+
                 XmlSerializer serializer = new XmlSerializer(typeof(List<UserInfo>));
                 using (FileStream fs = new FileStream("config.xml", FileMode.Create))
                 {
                     serializer.Serialize(fs, users);
                 }
 
-
                 MessageBox.Show("XML saved successfully!");
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show($"Eroare la salvare: {ex.Message}");
             }
         }
@@ -82,23 +104,31 @@ namespace Retea_Calculator
         {
             if (File.Exists("config.xml"))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<UserInfo>));
-                using (FileStream fs = new FileStream("config.xml", FileMode.Open))
+                try
                 {
-                    users = (List<UserInfo>)serializer.Deserialize(fs);
-                }
-                if (users == null)
-                {
-                    users = new List<UserInfo>();
-                }
-                dataGridView1.Rows.Clear();
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<UserInfo>));
+                    using (FileStream fs = new FileStream("config.xml", FileMode.Open))
+                    {
+                        users = (List<UserInfo>)serializer.Deserialize(fs);
+                    }
+                    if (users == null)
+                    {
+                        users = new List<UserInfo>();
+                    }
 
-                foreach (UserInfo user in users)
-                {
-                    dataGridView1.Rows.Add(user.Nume, user.Telefon, user.MAC);
-                }
+                    dataGridView1.Rows.Clear();
 
-                MessageBox.Show("XML loaded!");
+                    foreach (UserInfo user in users)
+                    {
+                        dataGridView1.Rows.Add(user.Nume, user.Telefon, user.MAC, user.PermiteSMS, user.PermiteApel);
+                    }
+
+                    MessageBox.Show("XML loaded!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Eroare la încărcare: {ex.Message}");
+                }
             }
             else
             {

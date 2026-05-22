@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Retea_Calculator
-{ 
+{
     public partial class FormConnect : Form
     {
         List<UserInfo> users = new List<UserInfo>();
@@ -22,6 +22,7 @@ namespace Retea_Calculator
         Timer gsmTimer = new Timer();
         private const string XmlFileName = "config.xml";
         private string serialBuffer = "";
+
         public FormConnect()
         {
             InitializeComponent();
@@ -61,6 +62,7 @@ namespace Retea_Calculator
                 LogeazaActivitate($"Eroare la incarcarea XML-ului: {ex.Message}");
             }
         }
+
         private void LogeazaActivitate(string mesaj)
         {
             if (listViewLog.InvokeRequired)
@@ -74,7 +76,7 @@ namespace Retea_Calculator
             item.SubItems.Add(mesaj);
             listViewLog.Items.Insert(0, item);
         }
-        
+
         private void ProceseazaApel(string dateModem)
         {
             int indexClip = dateModem.IndexOf("+CLIP:");
@@ -96,8 +98,17 @@ namespace Retea_Calculator
 
                     if (utilizatorGasit != null)
                     {
-                        LogeazaActivitate($"Utilizator autorizat identificat: {utilizatorGasit.Nume}");
-                        TrimiteMagicPacket(utilizatorGasit.MAC);
+                        LogeazaActivitate($"Utilizator identificat: {utilizatorGasit.Nume}");
+
+                        if (utilizatorGasit.PermiteApel)
+                        {
+                            LogeazaActivitate($"Permisiune apel confirmata pentru: {utilizatorGasit.Nume}. Se trimite WOL...");
+                            TrimiteMagicPacket(utilizatorGasit.MAC);
+                        }
+                        else
+                        {
+                            LogeazaActivitate($"Utilizatorul {utilizatorGasit.Nume} nu are permisiune pentru apel. WOL blocat.");
+                        }
                     }
                     else
                     {
@@ -106,6 +117,7 @@ namespace Retea_Calculator
                 }
             }
         }
+
         private void ProceseazaSMS(string dateModem)
         {
             try
@@ -160,6 +172,7 @@ namespace Retea_Calculator
                 LogeazaActivitate($"Eroare la procesarea SMS-ului: {ex.Message}");
             }
         }
+
         private void ValideazaSiTrimiteWOL(string numarTelefon)
         {
             UserInfo utilizatorGasit = users.Find(u => u.Telefon.Trim() == numarTelefon.Trim() ||
@@ -168,14 +181,24 @@ namespace Retea_Calculator
 
             if (utilizatorGasit != null)
             {
-                LogeazaActivitate($"Utilizator autorizat identificat: {utilizatorGasit.Nume}");
-                TrimiteMagicPacket(utilizatorGasit.MAC);
+                LogeazaActivitate($"Utilizator identificat: {utilizatorGasit.Nume}");
+
+                if (utilizatorGasit.PermiteSMS)
+                {
+                    LogeazaActivitate($"Permisiune SMS confirmata pentru: {utilizatorGasit.Nume}. Se trimite WOL...");
+                    TrimiteMagicPacket(utilizatorGasit.MAC);
+                }
+                else
+                {
+                    LogeazaActivitate($"Utilizatorul {utilizatorGasit.Nume} nu are permisiune pentru SMS. WOL blocat.");
+                }
             }
             else
             {
                 LogeazaActivitate($"Numarul {numarTelefon} nu este in baza de date XML.");
             }
         }
+
         private void TrimiteMagicPacket(string macAddress)
         {
             try
@@ -218,6 +241,7 @@ namespace Retea_Calculator
                 LogeazaActivitate($"Eroare la asamblarea/trimiterea pachetului WOL: {ex.Message}");
             }
         }
+
         private void GsmTimer_Tick(object sender, EventArgs e)
         {
             if (serialPort.IsOpen && serialPort.BytesToRead > 0)
@@ -245,7 +269,6 @@ namespace Retea_Calculator
                 }
             }
         }
-        
 
         private void btnConectare_Click_1(object sender, EventArgs e)
         {
@@ -313,6 +336,7 @@ namespace Retea_Calculator
             LogeazaActivitate("Lista porturilor disponibile a fost reimprospatata.");
             MessageBox.Show("Ports loaded!");
         }
+
         private void btnSendCommand_Click_1(object sender, EventArgs e)
         {
             if (serialPort.IsOpen)

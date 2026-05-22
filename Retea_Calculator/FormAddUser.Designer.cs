@@ -40,6 +40,11 @@
             this.txtMAC = new System.Windows.Forms.TextBox();
             this.btnSterge = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.Nume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Telefon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mac = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SMS = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Apel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,9 +77,15 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Nume,
+            this.Telefon,
+            this.Mac,
+            this.SMS,
+            this.Apel});
             this.dataGridView1.Location = new System.Drawing.Point(338, -1);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(381, 505);
+            this.dataGridView1.Size = new System.Drawing.Size(544, 506);
             this.dataGridView1.TabIndex = 26;
             // 
             // lblMac
@@ -83,9 +94,9 @@
             this.lblMac.ForeColor = System.Drawing.Color.White;
             this.lblMac.Location = new System.Drawing.Point(247, 149);
             this.lblMac.Name = "lblMac";
-            this.lblMac.Size = new System.Drawing.Size(66, 13);
+            this.lblMac.Size = new System.Drawing.Size(71, 13);
             this.lblMac.TabIndex = 25;
-            this.lblMac.Text = "Adresa MAC";
+            this.lblMac.Text = "Address MAC";
             // 
             // lblTelefon
             // 
@@ -93,9 +104,9 @@
             this.lblTelefon.ForeColor = System.Drawing.Color.White;
             this.lblTelefon.Location = new System.Drawing.Point(125, 149);
             this.lblTelefon.Name = "lblTelefon";
-            this.lblTelefon.Size = new System.Drawing.Size(88, 13);
+            this.lblTelefon.Size = new System.Drawing.Size(76, 13);
             this.lblTelefon.TabIndex = 24;
-            this.lblTelefon.Text = "Numar de telefon";
+            this.lblTelefon.Text = "Phone number";
             // 
             // lblNume
             // 
@@ -138,8 +149,7 @@
             this.btnSterge.Name = "btnSterge";
             this.btnSterge.Size = new System.Drawing.Size(128, 35);
             this.btnSterge.TabIndex = 19;
-            this.btnSterge.Text = "Sterge Utilizator";
-            this.btnSterge.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSterge.Text = "Delete User";
             this.btnSterge.UseVisualStyleBackColor = false;
             this.btnSterge.Click += new System.EventHandler(this.btnSterge_Click_1);
             // 
@@ -154,17 +164,41 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(130, 34);
             this.btnAdd.TabIndex = 29;
-            this.btnAdd.Text = "Adauga Utilizator";
-            this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAdd.Text = "Add User";
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // Nume
+            // 
+            this.Nume.HeaderText = "Nume";
+            this.Nume.Name = "Nume";
+            // 
+            // Telefon
+            // 
+            this.Telefon.HeaderText = "Telefon";
+            this.Telefon.Name = "Telefon";
+            // 
+            // Mac
+            // 
+            this.Mac.HeaderText = "Mac";
+            this.Mac.Name = "Mac";
+            // 
+            // SMS
+            // 
+            this.SMS.HeaderText = "SMS";
+            this.SMS.Name = "SMS";
+            // 
+            // Apel
+            // 
+            this.Apel.HeaderText = "Apel";
+            this.Apel.Name = "Apel";
             // 
             // FormAddUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(928, 600);
+            this.ClientSize = new System.Drawing.Size(1088, 610);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnLoadXML);
@@ -197,5 +231,10 @@
         private System.Windows.Forms.TextBox txtMAC;
         private System.Windows.Forms.Button btnSterge;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nume;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telefon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Mac;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn SMS;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Apel;
     }
 }

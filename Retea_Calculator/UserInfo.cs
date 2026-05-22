@@ -11,6 +11,8 @@ namespace Retea_Calculator
         public string Nume { get; set; }
         public string Telefon { get; set; }
         public string MAC { get; set; }
+        public bool PermiteSMS { get; set; }  
+        public bool PermiteApel { get; set; }
 
         public UserInfo() { }
     }

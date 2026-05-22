@@ -108,7 +108,7 @@ namespace Retea_Calculator
             btnConnect_form.BackColor = Color.FromArgb(52, 58, 64);
         }
 
-        
+       
     }
 
 }
